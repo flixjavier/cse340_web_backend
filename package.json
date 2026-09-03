@@ -1,0 +1,25 @@
+{
+  "name": "cse340_web_backend",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/flixjavier/cse340_web_backend#readme",
+  "bugs": {
+    "url": "https://github.com/flixjavier/cse340_web_backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flixjavier/cse340_web_backend.git"
+  },
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

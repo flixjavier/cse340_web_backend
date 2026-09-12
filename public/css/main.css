@@ -242,9 +242,15 @@ a:focus-visible {
 
 .organization-card img {
   border-radius: 8px;
+  flex: 0 0 80px;
   height: 80px;
   object-fit: contain;
   width: 80px;
+}
+
+.organization-card > div {
+  flex: 1;
+  min-width: 0;
 }
 
 .organization-card h2 {
@@ -255,11 +261,13 @@ a:focus-visible {
 
 .organization-card p {
   margin: 0 0 0.75rem;
+  overflow-wrap: anywhere;
 }
 
 .organization-card a {
   color: var(--pine-teal);
   font-weight: bold;
+  overflow-wrap: anywhere;
 }
 
 .organization-card a:hover {
@@ -273,4 +281,3 @@ a:focus-visible {
     text-align: center;
   }
 }
-

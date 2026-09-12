@@ -40,10 +40,14 @@ app.get('/', async(req, res) => {
 });
 
 /* app.get('/organizations', async(req, res) => {
-  const organizations = await getAllOrganizations();
-  // console.log(organizations);
-  const title = 'Organizations';
-  res.render('organizations', { title, organizations });
+  try {
+    const organizations = await getAllOrganizations();
+    const title = 'Organizations';
+    res.render('organizations', { title, organizations });
+  } catch (error) {
+    console.error('Error fetching organizations:', error.message);
+    res.status(500).send('Server Error: ' + error.message);
+  }
 }); */
 
 app.get('/organizations', async(req, res) => {

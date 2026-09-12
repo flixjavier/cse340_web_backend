@@ -1,11 +1,36 @@
 <%- include('partials/header') %>
-    <main>
-        <h1><%= title %></h1>
-        <h2>Upcoming Service Projects</h2>
-        <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
-        </ul>
-    </main>
+
+<main>
+    <section class="projects-section" aria-labelledby="projects-heading">
+        <h1 id="projects-heading"><%= title %></h1>
+        <p>Find upcoming service opportunities supported by our partner organizations.</p>
+
+        <div class="projects-list">
+            <% projects.forEach(project => { %>
+                <% const dateValue = new Date(project.project_date); %>
+                <% const formattedDate = dateValue.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    timeZone: 'UTC'
+                }); %>
+
+                <article class="project-card">
+                    <time class="project-date" datetime="<%= project.project_date %>">
+                        <%= formattedDate %>
+                    </time>
+
+                    <div class="project-details">
+                        <h2><%= project.title %></h2>
+                        <p>
+                            Sponsored by
+                            <span><%= project.organization_name %></span>
+                        </p>
+                    </div>
+                </article>
+            <% }); %>
+        </div>
+    </section>
+</main>
+
 <%- include('partials/footer') %>

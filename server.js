@@ -3,6 +3,7 @@ import {fileURLToPath} from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js'; 
+import { getAllProjects } from './src/models/projects.js';
 
 
 
@@ -61,9 +62,18 @@ app.get('/organizations', async(req, res) => {
   }
 });
 
-app.get('/projects', async(req, res) => {
-  const title = 'Projects';
-  res.render('projects', { title });
+app.get('/projects', async (req, res) => {
+  try {
+    const projects = await getAllProjects();
+
+    console.log('Service projects:', projects);
+
+    const title = 'Projects';
+    res.render('projects', { title, projects });
+  } catch (error) {
+    console.error('Error fetching service projects:', error.message);
+    res.status(500).send('Failed to load service projects: ' + error.message);
+  }
 });
 
 app.get('/categories', async(req, res) => {
@@ -83,5 +93,4 @@ app.listen(PORT, async() => {
     console.error('Failed to start server:', error.message);
   }
 });
-
 

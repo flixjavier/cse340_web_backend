@@ -4,7 +4,7 @@ import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js'; 
 import { getAllProjects } from './src/models/projects.js';
-
+import { getAllCategories } from './src/models/categories.js';
 
 
 // Define the application environment
@@ -40,17 +40,6 @@ app.get('/', async(req, res) => {
   res.render('home', { title });
 });
 
-/* app.get('/organizations', async(req, res) => {
-  try {
-    const organizations = await getAllOrganizations();
-    const title = 'Organizations';
-    res.render('organizations', { title, organizations });
-  } catch (error) {
-    console.error('Error fetching organizations:', error.message);
-    res.status(500).send('Server Error: ' + error.message);
-  }
-}); */
-
 app.get('/organizations', async(req, res) => {
   try {
     const organizations = await getAllOrganizations();
@@ -58,7 +47,7 @@ app.get('/organizations', async(req, res) => {
     res.render('organizations', { title, organizations });
   } catch (error) {
     console.error('Error fetching organizations:', error.message);
-    res.status(500).render('error', { message: 'Failed to load organizations' });
+    res.status(500).send('Failed to load organizations: ' + error.message);
   }
 });
 
@@ -77,8 +66,15 @@ app.get('/projects', async (req, res) => {
 });
 
 app.get('/categories', async(req, res) => {
-  const title = 'Categories';
-  res.render('categories', { title });
+  try{
+    const categories = await getAllCategories();
+    console.log('Service categories:', categories);
+    const title = 'Categories';
+    res.render('categories', { title, categories });
+  } catch (error) {
+    console.error('Error fetching categories:', error.message);
+    res.status(500).send('Failed to load categories: ' + error.message);
+  }
 });
 
 // Start the server and listen on the specified port

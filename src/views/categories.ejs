@@ -2,32 +2,14 @@
     <main>
         <section class="categories-section">
           <h1><%= title %></h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <p>Explore the types of service opportunities available in our community.</p>
 
           <div class="categories-container">
-            <article class="category-card">
-              <h2>Environmental</h2>
-              <p>lorem ipsum dolor sit amet</p>
-              <a href="#">Lorem ipsum</a>
-            </article>
-
-            <article class="category-card">
-              <h2>Educational</h2>
-              <p>lorem ipsum dolor sit amet</p>
-              <a href="#">Lorem ipsum</a>
-            </article>
-
-            <article class="category-card">
-              <h2>Community Service</h2>
-              <p>lorem ipsum dolor sit amet</p>
-              <a href="#">Lorem ipsum</a>
-            </article>
-
-            <article class="category-card">
-              <h2>Health and Wellness</h2>
-              <p>lorem ipsum dolor sit amet</p>
-              <a href="#">Lorem ipsum</a>
-            </article>
+            <% categories.forEach(category => { %>
+              <article class="category-card">
+                <h2><%= category.category_name %></h2>
+              </article>
+            <% }) %>
           </div>
         </section>
     </main>

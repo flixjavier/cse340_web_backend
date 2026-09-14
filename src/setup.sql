@@ -121,3 +121,74 @@ VALUES
  '2026-11-09');
 
  SELECT * FROM service_projects; 
+
+ CREATE TABLE categories (
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE projects_categories (
+    project_id INT NOT NULL,
+    category_id INT NOT NULL,
+
+    PRIMARY KEY (project_id, category_id),
+
+    FOREIGN KEY (project_id)
+        REFERENCES service_projects(project_id),
+
+    FOREIGN KEY (category_id)
+        REFERENCES categories(category_id)
+);
+
+INSERT INTO categories (category_name)
+VALUES
+    ('Food & Basic Needs'),
+    ('Environmental Stewardship'),
+    ('Community Support'),
+    ('Education & Youth Development'),
+    ('Recreation & Wellness');
+
+
+INSERT INTO projects_categories (project_id, category_id)
+VALUES
+    (1, 1), -- Community Food Drive: Food & Basic Needs
+    (1, 3), -- Community Food Drive: Community Support
+
+    (2, 2), -- Neighborhood Cleanup: Environmental Stewardship
+    (2, 3), -- Neighborhood Cleanup: Community Support
+
+    (3, 1), -- Clothing Donation Drive: Food & Basic Needs
+    (3, 3), -- Clothing Donation Drive: Community Support
+
+    (4, 3), -- Senior Support Day: Community Support
+
+    (5, 2), -- Park Restoration: Environmental Stewardship
+    (5, 3), -- Park Restoration: Community Support
+
+    (6, 2), -- Tree Planting Project: Environmental Stewardship
+
+    (7, 2), -- Recycling Campaign: Environmental Stewardship
+
+    (8, 2), -- Community Garden: Environmental Stewardship
+    (8, 3), -- Community Garden: Community Support
+
+    (9, 2), -- River Cleanup: Environmental Stewardship
+    (9, 3), -- River Cleanup: Community Support
+
+    (10, 2), -- Environmental Workshop: Environmental Stewardship
+    (10, 4), -- Environmental Workshop: Education & Youth Development
+
+    (11, 3), -- Youth Mentoring: Community Support
+    (11, 4), -- Youth Mentoring: Education & Youth Development
+
+    (12, 3), -- School Supply Drive: Community Support
+    (12, 4), -- School Supply Drive: Education & Youth Development
+
+    (13, 4), -- Reading Program: Education & Youth Development
+
+    (14, 4), -- Sports Day: Education & Youth Development
+    (14, 5), -- Sports Day: Recreation & Wellness
+
+    (15, 3), -- Community Education Fair: Community Support
+    (15, 4); -- Community Education Fair: Education & Youth Development

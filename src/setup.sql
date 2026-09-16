@@ -192,3 +192,11 @@ VALUES
 
     (15, 3), -- Community Education Fair: Community Support
     (15, 4); -- Community Education Fair: Education & Youth Development
+
+
+SELECT service_projects.title, categories.category_name 
+FROM service_projects 
+INNER JOIN projects_categories 
+    ON service_projects.project_id = projects_categories.project_id 
+INNER JOIN categories 
+    ON projects_categories.category_id = categories.category_id;

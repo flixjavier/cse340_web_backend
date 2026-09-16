@@ -4,6 +4,9 @@
         &copy; <%= new Date().getFullYear() %>
         <a href="/">CSE 340 Service Network</a>.
         All rights reserved.
+        <% if (NODE_ENV === 'development') { %>
+          <span class="env-indicator">Development Mode</span>
+        <% } %>
       </p>
     </div>
   </footer>

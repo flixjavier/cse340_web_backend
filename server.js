@@ -2,7 +2,7 @@ import express from 'express';
 import {fileURLToPath} from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
-import router from '.src/routes.js';
+import router from './src/routes.js';
 
 // Define the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';

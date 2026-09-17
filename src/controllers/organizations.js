@@ -1,5 +1,6 @@
 //import any necessary models
-import { getAllOrganizations } from '../models/organizations.js';
+import { getAllOrganizations, getOrganizationDetails } from '../models/organizations.js';
+import { getProjectsByOrganizationId } from '../models/projects.js';
 
 const showOrganizationsPage = async (req, res) => {
   try {
@@ -12,4 +13,19 @@ const showOrganizationsPage = async (req, res) => {
   }
 };
 
-export { showOrganizationsPage };
+const showOrganizationDetailsPage = async (req, res) => {
+  try {
+    const organizationId = req.params.id; 
+    const organizationDetails = await getOrganizationDetails(organizationId); 
+    const projects = await getProjectsByOrganizationId(organizationId);
+    const title = 'Organization Details';
+
+    res.render('organization', { title, organizationDetails, projects });
+  } catch (error) {
+    console.error('Error fetching organization details:', error.message);
+    res.status(500).send('Failed to load organization details: ' + error.message);
+  }
+}; 
+
+export { showOrganizationsPage, showOrganizationDetailsPage };  
+  

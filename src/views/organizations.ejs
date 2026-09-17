@@ -8,6 +8,7 @@
                 <% organizations.forEach(org=>{ %>
                     <article class="organization-card">
                         <img src="/images/<%= org.logo_filename %>" alt="<%= org.name %> logo">
+                        <a href="/organization/<%= org.organization_id %>">View Details</a>
                         <div>
                             <h2><%= org.name %></h2>
                             <p><%= org.description %></p>

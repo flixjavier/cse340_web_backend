@@ -335,6 +335,33 @@ a:focus-visible {
   font-weight: bold;
 }
 
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+}
+
+.category-tags a {
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background-color: var(--pine-teal);
+  color: var(--bright-snow);
+  text-decoration: none;
+}
+
+.category-tags a:hover {
+  background-color: var(--evergreen-dark);
+  text-decoration: underline;
+}
+
+.category-tags a:focus-visible {
+  outline: 3px solid var(--evergreen-dark);
+  outline-offset: 3px;
+}
+
 @media (max-width: 600px) {
   .project-card {
     align-items: flex-start;

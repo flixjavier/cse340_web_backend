@@ -200,3 +200,29 @@ INNER JOIN projects_categories
     ON service_projects.project_id = projects_categories.project_id 
 INNER JOIN categories 
     ON projects_categories.category_id = categories.category_id;
+
+
+SELECT p.project_id, p.title, p.description, p.date AS project_date, p.location, p.organization_id, o.name AS organization_name
+        FROM public.service_projects AS p
+        JOIN public.organizations AS o
+        ON o.organization_id = p.organization_id
+        WHERE p.project_id = 2;
+
+SELECT p.category_id, p.category_name 
+        FROM public.categories AS p
+        WHERE p.category_id = 1;
+
+
+SELECT c.category_id, c.category_name
+FROM public.categories AS c
+JOIN public.projects_categories AS pc
+ON pc.category_id = c.category_id
+WHERE pc.project_id = 1;
+
+
+SELECT p.project_id, p.title
+        FROM public.service_projects AS p
+        JOIN public.projects_categories AS pc
+        ON pc.project_id = p.project_id
+        WHERE pc.category_id = 1
+        ORDER BY p.title;

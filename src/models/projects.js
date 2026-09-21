@@ -67,4 +67,18 @@ const getProjectDetails = async (id) => {
     return result.rows[0] ?? null;
 }; 
 
-export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails };
+const getProjectsByCategoryId = async (categoryId) => {
+    const query = `
+        SELECT p.project_id, p.title
+        FROM public.service_projects AS p
+        JOIN public.projects_categories AS pc
+        ON pc.project_id = p.project_id
+        WHERE pc.category_id = $1
+        ORDER BY p.title;
+    `;
+    const result = await db.query(query, [categoryId]);
+    return result.rows;
+};
+
+
+export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, getProjectsByCategoryId};

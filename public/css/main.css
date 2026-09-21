@@ -137,6 +137,9 @@ h1 {
 }
 
 .category-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
   color: var(--evergreen);
   margin-top: 0;
 }
@@ -146,6 +149,7 @@ h1 {
 }
 
 .category-card a {
+  display: block;
   align-self: flex-start;
   background-color: var(--pine-teal);
   border-radius: 6px;

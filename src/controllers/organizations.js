@@ -44,6 +44,9 @@ const processNewOrganizationForm = async (req, res) => {
   const { name, description, contactEmail } = req.body; 
   const logoFilename = 'placeholder-logo.png';  //use the placeholder logo for all new organizations
   const organizationId = await createOrganization(name, description, contactEmail, logoFilename); 
+  //set a success flash message
+  req.flash('success',`${name} added successfuly`)
+
   res.redirect(`/organization/${organizationId}`); 
 }
 

@@ -35,4 +35,18 @@
         </li>
       </ul>
     </nav>
+    <% const messages = flash(); %>
+      <div class="flash-messages">
+        <% Object.keys(messages).forEach(type => { %>
+          <% messages[type].forEach(msg => { %>
+            <div
+              class="flash-message flash-<%= type %>"
+              role="<%= type === 'error' ? 'alert' : 'status' %>"
+            >
+              <strong class="flash-label"><%= type %>:</strong>
+              <%= msg %>
+            </div>
+          <% }); %>
+        <% }); %>
+      </div>
   </header>

@@ -1,8 +1,8 @@
 <%- include('partials/header') %>
-<main>
+<main class="organization-form-page">
     <h1><%= title %></h1>
 
-    <form action="/new-organization" method="POST">
+    <form class="organization-form" action="/new-organization" method="POST">
       <div class="form-group">
         <label for="name">Organization Name</label>
         <input
@@ -17,6 +17,7 @@
         <textarea
           id="description"
           name="description"
+          rows="5"
         ></textarea>
       </div>
 
@@ -29,7 +30,10 @@
         />
       </div>
 
-      <button type="submit">Create Organization</button>
+      <div class="form-actions">
+        <button type="submit">Create Organization</button>
+        <a href="/organizations">Cancel</a>
+      </div>
     </form>
 
 </main>

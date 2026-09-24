@@ -377,3 +377,108 @@ a:focus-visible {
     flex-basis: auto;
   }
 }
+
+/* New organization form */
+.organization-form-page {
+  max-width: 744px;
+}
+
+.organization-form-page h1 {
+  text-align: center;
+}
+
+.organization-form {
+  background-color: white;
+  border: 1px solid var(--alabaster-grey);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 26, 18, 0.08);
+  padding: 2rem;
+}
+
+.organization-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.organization-form label {
+  display: block;
+  color: var(--evergreen);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.organization-form input,
+.organization-form textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--alabaster-grey);
+  border-radius: 6px;
+  background-color: var(--bright-snow);
+  color: var(--evergreen-dark);
+  font: inherit;
+  padding: 0.75rem 1rem;
+}
+
+.organization-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.organization-form input:focus,
+.organization-form textarea:focus {
+  border-color: var(--pine-teal);
+  outline: 2px solid var(--pine-teal);
+  outline-offset: 2px;
+}
+
+.organization-form .form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.organization-form button {
+  border: none;
+  border-radius: 6px;
+  background-color: var(--evergreen);
+  color: var(--bright-snow);
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+  padding: 0.85rem 1.5rem;
+}
+
+.organization-form button:hover {
+  background-color: var(--evergreen-dark);
+}
+
+.organization-form .form-actions a {
+  color: var(--pine-teal);
+  font-weight: bold;
+  text-underline-offset: 3px;
+}
+
+.organization-form .form-actions a:hover {
+  color: var(--evergreen-dark);
+}
+
+.organization-form button:focus-visible,
+.organization-form .form-actions a:focus-visible {
+  outline: 3px solid var(--pine-teal);
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .organization-form {
+    padding: 1.5rem;
+  }
+
+  .organization-form .form-actions {
+    flex-direction: column;
+  }
+
+  .organization-form button {
+    width: 100%;
+  }
+}

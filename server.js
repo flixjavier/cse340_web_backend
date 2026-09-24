@@ -28,6 +28,11 @@ app.set('views', path.join(__dirname, 'src/views'));
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+//middleware to parse URL-encoded data and JSON data from POST
+//Allow express to recieve and process common POST
+app.use(express.urlencoded({extended: true})); 
+app.use(express.json); 
+
 // where to find your templates
 app.set('views', path.join(__dirname, 'src/views'));
 

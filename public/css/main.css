@@ -449,6 +449,54 @@ h1 {
   outline-offset: 4px;
 }
 
+/* Category assignment form */
+.category-assignment-form h2 {
+  margin-top: 0;
+  overflow-wrap: anywhere;
+}
+
+.category-options {
+  min-width: 0;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.category-options legend {
+  margin-bottom: 0.75rem;
+  padding: 0;
+  color: var(--evergreen);
+  font-weight: bold;
+}
+
+.category-assignment-form .category-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--alabaster-grey);
+  border-radius: 6px;
+  background-color: var(--bright-snow);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.category-assignment-form .category-option:hover,
+.category-assignment-form .category-option:focus-within {
+  border-color: var(--pine-teal);
+}
+
+.category-assignment-form input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  padding: 0;
+  accent-color: var(--evergreen);
+  cursor: pointer;
+}
+
 /* Flash messages */
 .flash-messages {
   max-width: 1100px;

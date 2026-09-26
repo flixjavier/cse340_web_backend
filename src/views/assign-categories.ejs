@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+<main class="organization-form-page">
+  <h1>Assign Categories</h1>
+  <form class="organization-form category-assignment-form" action="/assign-categories/<%= projectId %>" method="POST">
+    <h2><%= projectDetails.title %></h2>
+    <p id="category-help">Select the categories for this project. Clear all selections to remove its categories.</p>
+    <fieldset class="category-options" aria-describedby="category-help">
+      <legend>Project categories</legend>
+      <% if (categories.length === 0) { %>
+        <p>No categories are available.</p>
+      <% } %>
+      <% categories.forEach(category => { %>
+        <label class="category-option" for="category-<%= category.category_id %>">
+          <input
+            type="checkbox"
+            id="category-<%= category.category_id %>"
+            name="categoryIds"
+            value="<%= category.category_id %>"
+            <%= assignedCategories.some(ac => ac.category_id === category.category_id) ? 'checked' : '' %>
+          />
+          <span><%= category.category_name %></span>
+        </label>
+      <% }); %>
+    </fieldset>
+    <div class="form-actions">
+      <button type="submit">Update Categories</button>
+      <a href="/project/<%= projectId %>">Cancel</a>
+    </div>
+  </form>
+</main>
+<%- include('partials/footer') %>

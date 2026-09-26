@@ -5,7 +5,7 @@ import { showProjectsPage , showNewProjectForm, processNewProjectForm } from './
 import { testErrorRoute } from './controllers/errors.js';
 import { showOrganizationDetailsPage, showNewOrganizationForm } from './controllers/organizations.js';
 import { showProjectDetailsPage, projectValidation } from './controllers/projects.js';
-import { showCategoriesPage, showCategoryDetailsPage } from './controllers/categories.js';
+import { showCategoriesPage, showCategoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm } from './controllers/categories.js';
 import { processNewOrganizationForm, organizationValidation, showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
 
 
@@ -45,5 +45,9 @@ router.get('/new-project', showNewProjectForm);
 //Route POST to handle new project
 router.post('/new-project',projectValidation,processNewProjectForm); 
 
+//Route to handle assign categories
+router.get('/assign-categories/:projectId', showAssignCategoriesForm);
+
+router.post('/assign-categories/:projectId', processAssignCategoriesForm)
 
 export default router;

@@ -14,6 +14,9 @@
     <p>Organization: 
       <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>
     </p>
+    <a class="add-organization-link" href="/edit-project/<%=project.project_id %>">
+                Edit a project
+    </a>
     <section aria-labelledby="categories-heading">
       <h2 id="categories-heading">Categories</h2>
       <ul class="category-tags">

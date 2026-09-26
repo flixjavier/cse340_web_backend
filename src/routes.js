@@ -1,7 +1,7 @@
 import express from 'express';
 import {showHomePage} from './controllers/index.js';
 import { showOrganizationsPage } from './controllers/organizations.js';
-import { showProjectsPage , showNewProjectForm, processNewProjectForm } from './controllers/projects.js';
+import { showProjectsPage , showNewProjectForm, processNewProjectForm, showEditProjectForm, processEditProjectForm } from './controllers/projects.js';
 import { testErrorRoute } from './controllers/errors.js';
 import { showOrganizationDetailsPage, showNewOrganizationForm } from './controllers/organizations.js';
 import { showProjectDetailsPage, projectValidation } from './controllers/projects.js';
@@ -49,5 +49,12 @@ router.post('/new-project',projectValidation,processNewProjectForm);
 router.get('/assign-categories/:projectId', showAssignCategoriesForm);
 
 router.post('/assign-categories/:projectId', processAssignCategoriesForm)
+
+//Route to handle edit projects
+router.get('/edit-project/:id', showEditProjectForm);
+
+//Route POST to handle update project
+router.post('/edit-project/:id',projectValidation,processEditProjectForm); 
+
 
 export default router;

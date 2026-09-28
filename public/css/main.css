@@ -356,16 +356,16 @@ h1 {
   outline-offset: 3px;
 }
 
-/* Shared organization and project forms */
-.organization-form-page {
+/* Shared organization, project, and category forms */
+.data-form-page {
   max-width: 744px;
 }
 
-.organization-form-page h1 {
+.data-form-page h1 {
   text-align: center;
 }
 
-.organization-form {
+.data-form {
   background-color: white;
   border: 1px solid var(--alabaster-grey);
   border-radius: 12px;
@@ -373,20 +373,20 @@ h1 {
   padding: 2rem;
 }
 
-.organization-form .form-group {
+.data-form .form-group {
   margin-bottom: 1.5rem;
 }
 
-.organization-form label {
+.data-form label {
   display: block;
   color: var(--evergreen);
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.organization-form input,
-.organization-form select,
-.organization-form textarea {
+.data-form input,
+.data-form select,
+.data-form textarea {
   display: block;
   width: 100%;
   border: 1px solid var(--alabaster-grey);
@@ -397,20 +397,20 @@ h1 {
   padding: 0.75rem 1rem;
 }
 
-.organization-form textarea {
+.data-form textarea {
   min-height: 140px;
   resize: vertical;
 }
 
-.organization-form input:focus,
-.organization-form select:focus,
-.organization-form textarea:focus {
+.data-form input:focus,
+.data-form select:focus,
+.data-form textarea:focus {
   border-color: var(--pine-teal);
   outline: 2px solid var(--pine-teal);
   outline-offset: 2px;
 }
 
-.organization-form .form-actions {
+.data-form .form-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -418,7 +418,7 @@ h1 {
   margin-top: 2rem;
 }
 
-.organization-form button {
+.data-form button {
   border: none;
   border-radius: 6px;
   background-color: var(--evergreen);
@@ -429,22 +429,22 @@ h1 {
   padding: 0.85rem 1.5rem;
 }
 
-.organization-form button:hover {
+.data-form button:hover {
   background-color: var(--evergreen-dark);
 }
 
-.organization-form .form-actions a {
+.data-form .form-actions a {
   color: var(--pine-teal);
   font-weight: bold;
   text-underline-offset: 3px;
 }
 
-.organization-form .form-actions a:hover {
+.data-form .form-actions a:hover {
   color: var(--evergreen-dark);
 }
 
-.organization-form button:focus-visible,
-.organization-form .form-actions a:focus-visible {
+.data-form button:focus-visible,
+.data-form .form-actions a:focus-visible {
   outline: 3px solid var(--pine-teal);
   outline-offset: 4px;
 }
@@ -608,15 +608,15 @@ h1 {
     flex-basis: auto;
   }
 
-  .organization-form {
+  .data-form {
     padding: 1.5rem;
   }
 
-  .organization-form .form-actions {
+  .data-form .form-actions {
     flex-direction: column;
   }
 
-  .organization-form button {
+  .data-form button {
     width: 100%;
   }
 

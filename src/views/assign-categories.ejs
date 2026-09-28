@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
-<main class="organization-form-page">
+<main class="data-form-page">
   <h1>Assign Categories</h1>
-  <form class="organization-form category-assignment-form" action="/assign-categories/<%= projectId %>" method="POST">
+  <form class="data-form category-assignment-form" action="/assign-categories/<%= projectId %>" method="POST">
     <h2><%= projectDetails.title %></h2>
     <p id="category-help">Select the categories for this project. Clear all selections to remove its categories.</p>
     <fieldset class="category-options" aria-describedby="category-help">

@@ -5,7 +5,6 @@ import { createOrganization, updateOrganization } from '../models/organizations.
 import { body, validationResult } from 'express-validator';
 
 // Define validation and sanitization rules for organization form
-// Define validation rules for organization form
 
 const organizationValidation = [
   body('name')
@@ -132,6 +131,6 @@ const processEditOrganizationForm = async (req, res, next) => {
     next(error); // Pass the error to the next middleware for centralized error handling
   } 
   
-}
+}; 
 
 export { showOrganizationsPage, showOrganizationDetailsPage, showNewOrganizationForm, processNewOrganizationForm, organizationValidation, showEditOrganizationForm, processEditOrganizationForm};  

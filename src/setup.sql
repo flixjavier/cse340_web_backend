@@ -228,3 +228,36 @@ SELECT p.project_id, p.title
         ON pc.project_id = p.project_id
         WHERE pc.category_id = 1
         ORDER BY p.title;
+
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE, 
+    role_description TEXT
+);
+
+INSERT INTO roles (role_name, role_description) VALUES 
+    
+    ('user', 'Standard user with basic access'),
+    ('admin', 'Administrator with full system access')
+    ; 
+
+SELECT * FROM public.roles
+ORDER BY role_id ASC 
+
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY, name VARCHAR(100) NOT NULL, email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INT REFERENCES roles(role_id), created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP); 
+
+
+INSERT INTO users (name, email, password_hash, role_id) VALUES 
+    ('testuser', 'test@example.com', 'placeholder_hash', 1)
+;
+
+SELECT u.user_id, u.name, u.email, r.role_name, r.role_description
+        FROM public.users AS u
+        JOIN public.roles AS r
+        ON u.role_id = r.role_id;
+
+DELETE FROM users WHERE email = 'test@example.com';

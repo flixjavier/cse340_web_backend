@@ -1,3 +1,5 @@
+SET search_path TO public;
+
 CREATE TABLE organizations (
     organization_id SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
@@ -30,9 +32,9 @@ VALUES
 CREATE TABLE service_projects (
     project_id SERIAL PRIMARY KEY,
     organization_id INTEGER NOT NULL,
-    title VARCHAR(100) NOT NULL,
+    title VARCHAR(200) NOT NULL,
     description TEXT NOT NULL,
-    location VARCHAR(150) NOT NULL,
+    location VARCHAR(200) NOT NULL,
     date DATE NOT NULL,
     FOREIGN KEY (organization_id)
         REFERENCES organizations(organization_id)
@@ -124,7 +126,7 @@ VALUES
 
  CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
-    category_name VARCHAR(50) NOT NULL UNIQUE
+    category_name VARCHAR(100) NOT NULL UNIQUE
 );
 
 

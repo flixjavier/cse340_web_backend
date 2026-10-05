@@ -7,6 +7,8 @@ import { showOrganizationDetailsPage, showNewOrganizationForm } from './controll
 import { showProjectDetailsPage, projectValidation } from './controllers/projects.js';
 import { showCategoriesPage, showCategoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm, categoryValidation, showNewCategoryForm, processEditCategoryForm, processNewCategoryForm, showEditCategoryForm } from './controllers/categories.js';
 import { processNewOrganizationForm, organizationValidation, showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
+import { showUserRegistrationForm, processUserRegistrationForm } from './controllers/users.js';
+
 
 
 const router = express.Router();
@@ -67,5 +69,11 @@ router.get('/edit-category/:id', showEditCategoryForm);
 
 //Route POST to handle update category
 router.post('/edit-category/:id',categoryValidation,processEditCategoryForm); 
+
+//Route for user registration page
+router.get('/register', showUserRegistrationForm); 
+
+router.post('/register', processUserRegistrationForm); 
+
 
 export default router;

@@ -7,7 +7,7 @@ import { showOrganizationDetailsPage, showNewOrganizationForm } from './controll
 import { showProjectDetailsPage, projectValidation } from './controllers/projects.js';
 import { showCategoriesPage, showCategoryDetailsPage, showAssignCategoriesForm, processAssignCategoriesForm, categoryValidation, showNewCategoryForm, processEditCategoryForm, processNewCategoryForm, showEditCategoryForm } from './controllers/categories.js';
 import { processNewOrganizationForm, organizationValidation, showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
-import { showUserRegistrationForm, processUserRegistrationForm } from './controllers/users.js';
+import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout } from './controllers/users.js';
 
 
 
@@ -75,5 +75,14 @@ router.get('/register', showUserRegistrationForm);
 
 router.post('/register', processUserRegistrationForm); 
 
+//Route for user login page
+router.get('/login', showLoginForm);
+
+router.post('/login', processLoginForm);
+
+//Route for user logout
+router.get('/logout', processLogout);
 
 export default router;
+
+

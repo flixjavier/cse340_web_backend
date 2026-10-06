@@ -33,10 +33,21 @@
             Categories
           </a>
         </li>
-        <li>
-          <a href="/register" aria-current="<%= title === 'Register' ? 'page' : 'false' %>">Register
-          </a>
-        </li>
+        <% if (isLoggedIn) { %>
+          <!-- HTML for the true case -->
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+        <% } else { %>
+          <!-- HTML for the false case -->
+          <li>
+            <a href="/register" aria-current="<%= title === 'Register' ? 'page' : 'false' %>">Register
+            </a>
+          </li>
+          <li>
+            <a href="/login">Login</a>
+          </li>
+        <% } %>
       </ul>
     </nav>
     <% const messages = flash(); %>

@@ -63,8 +63,12 @@ app.use((req, res, next) => {
 //middleware to make NODE_ENV available in all templates
 app.use((req,res,next)=> {
   res.locals.NODE_ENV = NODE_ENV;
+  res.locals.isLoggedIn = false; // Default value for isLoggedIn
+  if (req.session && req.session.user) {
+    res.locals.isLoggedIn = true;
+  }
   next(); 
-})
+}); 
 /**
  * Routes
  */

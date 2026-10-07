@@ -108,6 +108,64 @@ h1 {
   width: 100%;
 }
 
+/* Dashboard */
+.dashboard-page {
+  overflow-wrap: anywhere;
+}
+
+.dashboard-eyebrow {
+  color: var(--pine-teal);
+  font-weight: bold;
+  margin: 0 0 0.75rem;
+}
+
+.dashboard-intro {
+  color: var(--pine-teal);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-account {
+  background-color: white;
+  border: 1px solid var(--alabaster-grey);
+  border-top: 4px solid var(--pine-teal);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 26, 18, 0.08);
+  margin-bottom: 2.5rem;
+  padding: 1.75rem;
+}
+
+.dashboard-account h2 {
+  margin-top: 0;
+}
+
+.dashboard-account dl,
+.dashboard-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+}
+
+.dashboard-account dl {
+  margin-bottom: 0;
+}
+
+.dashboard-account dt {
+  color: var(--pine-teal);
+  font-weight: bold;
+}
+
+.dashboard-account dd {
+  margin: 0.25rem 0 0;
+}
+
+.dashboard-grid h3 {
+  color: var(--evergreen);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
 /* Categories page */
 .categories-section > p {
   color: var(--pine-teal);

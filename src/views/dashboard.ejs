@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+<main class="dashboard-page">
+  <p class="dashboard-eyebrow"><%= title %></p>
+  <h1>Welcome, <%= name %>!</h1>
+  <p class="dashboard-intro">Find your next opportunity to serve and connect with your community.</p>
+
+  <section class="dashboard-account" aria-labelledby="account-heading">
+    <h2 id="account-heading">Your account</h2>
+    <dl>
+      <div>
+        <dt>Name</dt>
+        <dd><%= name %></dd>
+      </div>
+      <div>
+        <dt>Email</dt>
+        <dd><%= email %></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="explore-heading">
+    <h2 id="explore-heading">Explore your community</h2>
+    <div class="dashboard-grid">
+      <article class="category-card">
+        <h3>Service projects</h3>
+        <p>Discover upcoming projects and find opportunities to make a difference.</p>
+        <a href="/projects">View projects</a>
+      </article>
+      <article class="category-card">
+        <h3>Organizations</h3>
+        <p>Meet the organizations bringing people together to serve.</p>
+        <a href="/organizations">Explore organizations</a>
+      </article>
+      <article class="category-card">
+        <h3>Categories</h3>
+        <p>Browse service opportunities by the causes that matter to you.</p>
+        <a href="/categories">Browse categories</a>
+      </article>
+    </div>
+  </section>
+</main>
+<%- include('partials/footer') %>

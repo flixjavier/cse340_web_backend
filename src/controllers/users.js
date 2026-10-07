@@ -77,7 +77,23 @@ const showDashboard = (req, res) => {
   res.render('dashboard', { title: 'Dashboard', name: user.name, email: user.email });
 };
 
-export { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard }; 
+const requireRole = (role) => {
+  return (req, res, next) => {
+    if (!req.session || !req.session.user) {
+      req.flash('error', 'Please log in to access this page.');
+      return res.redirect('/login');
+    }
+    if (req.session.user.role_name !== role){
+      req.flash('error','User does not have the required permissions to access this page.');
+      return res.redirect('/');
+    }
+    next();
+
+  };
+};
+
+
+export { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, requireRole }; 
 
 
 

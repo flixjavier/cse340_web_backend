@@ -261,3 +261,19 @@ SELECT u.user_id, u.name, u.email, r.role_name, r.role_description
         ON u.role_id = r.role_id;
 
 DELETE FROM users WHERE email = 'test@example.com';
+
+
+SELECT u.user_id, u.name, u.email, u.role_id 
+FROM public.users AS u
+WHERE email = 'admin@example.com';
+
+SELECT r.role_id, r.role_name
+FROM public.roles AS r;
+
+UPDATE users
+SET role_id = (
+    SELECT role_id
+    FROM roles
+    WHERE role_name = 'admin'
+)
+WHERE email = 'admin@example.com';

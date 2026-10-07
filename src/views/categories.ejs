@@ -16,8 +16,11 @@
             <% }) %>
           </div>
         </section>
-        <a class="add-organization-link" href="/new-category">
+        
+        <% if (user && user.role_name === 'admin') { %>
+          <a class="add-organization-link" href="/new-category">
                 + Add a new category
-        </a>
+          </a>
+        <% } %>
     </main>
 <%- include('partials/footer') %>

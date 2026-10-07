@@ -67,6 +67,7 @@ app.use((req,res,next)=> {
   if (req.session && req.session.user) {
     res.locals.isLoggedIn = true;
   }
+  res.locals.user = req.session.user || null; // Make user available in templates
   next(); 
 }); 
 /**

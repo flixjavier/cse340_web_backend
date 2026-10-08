@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<main class="users-page">
+  <h1 id="users-heading"><%= title %></h1>
+  <p class="users-intro">View the people registered in the Service Network and their assigned roles.</p>
+  <div class="users-table-card">
+  <table class="users-table" aria-labelledby="users-heading">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (users.length === 0) { %>
+        <tr>
+          <td colspan="3" class="users-empty">No registered users yet.</td>
+        </tr>
+      <% } %>
+      <% users.forEach(account => { %>
+        <tr>
+          <td><%= account.name %></td>
+          <td><%= account.email %></td>
+          <td><span class="user-role"><%= account.role_name || 'Unassigned' %></span></td>
+        </tr>
+      <%}); %>
+    </tbody>
+  </table>
+  </div>
+  <p><a class="add-organization-link" href="/dashboard">Back to Dashboard</a></p>
+
+</main>
+<%- include('partials/footer') %>

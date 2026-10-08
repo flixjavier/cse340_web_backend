@@ -38,5 +38,12 @@
       </article>
     </div>
   </section>
+  <% if (user && user.role_name === 'admin') { %>
+    <p>
+    <a class="add-organization-link" href="/users">
+      View Registered Users
+    </a>
+  </p>
+  <% } %>
 </main>
 <%- include('partials/footer') %>

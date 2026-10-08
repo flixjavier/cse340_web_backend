@@ -52,4 +52,14 @@ const authenticateUser = async (email, password) => {
 
 };
 
-export { createUser, authenticateUser };
+const getAllUsers = async () => {
+  const query = `SELECT u.name, u.email, r.role_name
+  FROM users as u
+  LEFT JOIN roles as r on u.role_id = r.role_id
+  ORDER by u.name;`;
+
+  const result = await db.query(query);
+  return result.rows;
+};
+
+export { createUser, authenticateUser, getAllUsers };

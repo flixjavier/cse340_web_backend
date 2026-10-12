@@ -277,3 +277,11 @@ SET role_id = (
     WHERE role_name = 'admin'
 )
 WHERE email = 'admin@example.com';
+
+CREATE TABLE project_volunteers (
+    user_id INTEGER NOT NULL, 
+    project_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (project_id) REFERENCES service_projects(project_id),
+    PRIMARY KEY (user_id, project_id)
+);

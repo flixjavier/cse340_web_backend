@@ -1,153 +1,238 @@
 //import any necessary models
-import { getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
-import { getCategoriesByProjectId } from '../models/categories.js';
+import {
+	getUpcomingProjects,
+	getProjectDetails,
+	createProject,
+	updateProject,
+	addVolunteer,
+	removeVolunteer,
+	getVolunteerProjectsByUserId,
+} from "../models/projects.js";
+import { getCategoriesByProjectId } from "../models/categories.js";
 import { getAllOrganizations } from "../models/organizations.js";
 import { body, validationResult } from "express-validator";
 
 const projectValidation = [
-  body('title')
-    .trim()
-    .notEmpty()
-    .withMessage('Title is required')
-    .isLength({min: 3,max: 200})
-    .withMessage('Title must be between 3 and 200 characters'), 
-  body('description')
-    .trim()
-    .notEmpty()
-    .withMessage('Description is required')
-    .isLength({max: 1000})
-    .withMessage('Description must be at most 1000 characters'), 
-  body('location')
-    .trim()
-    .notEmpty()
-    .withMessage('Location is required')
-    .isLength({max: 200})
-    .withMessage('Location must be at most 200 characters'),
-  body('date')
-    .trim()
-    .notEmpty()
-    .withMessage('Date is required')
-    .isISO8601()
-    .withMessage('Date must be valid, for example 2026-10-15'),
-  body('organizationId')
-    .trim()
-    .notEmpty()
-    .withMessage('Organization is required')
-    .isInt()
-    .withMessage('Organization must be a valid integer'),
-  ]; 
-
+	body("title")
+		.trim()
+		.notEmpty()
+		.withMessage("Title is required")
+		.isLength({ min: 3, max: 200 })
+		.withMessage("Title must be between 3 and 200 characters"),
+	body("description")
+		.trim()
+		.notEmpty()
+		.withMessage("Description is required")
+		.isLength({ max: 1000 })
+		.withMessage("Description must be at most 1000 characters"),
+	body("location")
+		.trim()
+		.notEmpty()
+		.withMessage("Location is required")
+		.isLength({ max: 200 })
+		.withMessage("Location must be at most 200 characters"),
+	body("date")
+		.trim()
+		.notEmpty()
+		.withMessage("Date is required")
+		.isISO8601()
+		.withMessage("Date must be valid, for example 2026-10-15"),
+	body("organizationId")
+		.trim()
+		.notEmpty()
+		.withMessage("Organization is required")
+		.isInt()
+		.withMessage("Organization must be a valid integer"),
+];
 
 const NUMBER_OF_UPCOMING_PROJECTS = 5; // Adjust this number as needed
 
 const showProjectsPage = async (req, res, next) => {
-  try {
-    const projects = await getUpcomingProjects(NUMBER_OF_UPCOMING_PROJECTS);
-    res.render('projects', { title: 'Upcoming Service Projects', projects });
+	try {
+		const projects = await getUpcomingProjects(NUMBER_OF_UPCOMING_PROJECTS);
+		res.render("projects", { title: "Upcoming Service Projects", projects });
 
-    //console.log('Service projects:', projects);
-
-  } catch (error) {
-    console.error('Error fetching service projects:', error.message);
-    next(error); // Pass the error to the next middleware for centralized error handling
-  }
+		//console.log('Service projects:', projects);
+	} catch (error) {
+		console.error("Error fetching service projects:", error.message);
+		next(error); // Pass the error to the next middleware for centralized error handling
+	}
 };
 
 const showNewProjectForm = async (req, res, next) => {
-  try {
-    const organizations = await getAllOrganizations()
-    res.render('new-project', { title: 'Add new Service Project', organizations });
-
-
-  } catch (error) {
-    console.error('Error fetching service organizations:', error.message);
-    next(error); // Pass the error to the next middleware for centralized error handling
-  }
+	try {
+		const organizations = await getAllOrganizations();
+		res.render("new-project", {
+			title: "Add new Service Project",
+			organizations,
+		});
+	} catch (error) {
+		console.error("Error fetching service organizations:", error.message);
+		next(error); // Pass the error to the next middleware for centralized error handling
+	}
 };
 
 const showProjectDetailsPage = async (req, res, next) => {
-    try {
-      const id = req.params.id;
-      if (!/^[1-9]\d*$/.test(id)) {
-        return res.status(400).send('Invalid project ID');
-      }
-      const project = await getProjectDetails(id);
-      if (!project) {
-        const error = new Error('Project not found');
-        error.status = 404;
-        return next(error);
-      }
-      const categories = await getCategoriesByProjectId(id);
-      res.render('project', { title: project.title, project, categories });
-    }
-    catch (error) {
-      console.error('Error fetching project details:', error.message);
-      next(error); // Pass the error to the next middleware for centralized error handling
-    }
-}
+	try {
+		const id = req.params.id;
+		if (!/^[1-9]\d*$/.test(id)) {
+			return res.status(400).send("Invalid project ID");
+		}
+		const project = await getProjectDetails(id);
+		if (!project) {
+			const error = new Error("Project not found");
+			error.status = 404;
+			return next(error);
+		}
+		const categories = await getCategoriesByProjectId(id);
+		let isVolunteering = false;
+		if (req.session.user) {
+			const volunteerProjects = await getVolunteerProjectsByUserId(
+				req.session.user.user_id,
+			);
 
-const processNewProjectForm = async (req,res,next) => {
-  try {
-    const results = validationResult(req);
-    if (!results.isEmpty()) {
-      results.array().forEach((error) => {
-      req.flash('error', error.msg);
-      });
-      //redirect to /new-organization
-      return res.redirect('/new-project');
-    }
-    const { title, description, location, date, organizationId} = req.body; 
-    await createProject (title, description, location, date, organizationId);
-    //set a success flash message
-    req.flash('success',`Service project ${title} created`)
-    res.redirect(`/projects`);
-  } catch (error) {
-    next(error)
-  }
-}
+			volunteerProjects.forEach((volunteerProject) => {
+				if (volunteerProject.project_id === Number(id)) {
+					isVolunteering = true;
+				}
+			});
+		}
+		res.render("project", {
+			title: project.title,
+			project,
+			categories,
+			isVolunteering,
+		});
+	} catch (error) {
+		console.error("Error fetching project details:", error.message);
+		next(error); // Pass the error to the next middleware for centralized error handling
+	}
+};
+
+const processNewProjectForm = async (req, res, next) => {
+	try {
+		const results = validationResult(req);
+		if (!results.isEmpty()) {
+			results.array().forEach((error) => {
+				req.flash("error", error.msg);
+			});
+			//redirect to /new-organization
+			return res.redirect("/new-project");
+		}
+		const { title, description, location, date, organizationId } = req.body;
+		await createProject(title, description, location, date, organizationId);
+		//set a success flash message
+		req.flash("success", `Service project ${title} created`);
+		res.redirect(`/projects`);
+	} catch (error) {
+		next(error);
+	}
+};
 
 const showEditProjectForm = async (req, res, next) => {
-  try {
-    const projectId = req.params.id;
-    const projectDetails = await getProjectDetails(projectId); 
-    if (!projectDetails) {
-      const error = new Error('Project not found');
-      error.status = 404;
-      return next(error);
-    }
-    const organizations = await getAllOrganizations()
-    const title = 'Edit Service Project';
+	try {
+		const projectId = req.params.id;
+		const projectDetails = await getProjectDetails(projectId);
+		if (!projectDetails) {
+			const error = new Error("Project not found");
+			error.status = 404;
+			return next(error);
+		}
+		const organizations = await getAllOrganizations();
+		const title = "Edit Service Project";
 
-    res.render('edit-project', { title, projectDetails, organizations });
-    
-  } catch (error) {
-    console.error('Error updating project:', error.message);
-    next(error); // Pass the error to the next middleware for centralized error handling
-  }
+		res.render("edit-project", { title, projectDetails, organizations });
+	} catch (error) {
+		console.error("Error updating project:", error.message);
+		next(error); // Pass the error to the next middleware for centralized error handling
+	}
 };
 
 const processEditProjectForm = async (req, res, next) => {
-  try {
-    const projectId = req.params.id;
-    const results = validationResult(req);
-    if (!results.isEmpty()) {
-      results.array().forEach((error) => {
-      req.flash('error', error.msg);
-    }); 
-     //redirect to /edit-project/
-    return res.redirect(`/edit-project/${projectId}`);
-  }
-    const { title, description, location, date, organizationId } = req.body; 
-    await updateProject(projectId, title, description, location, date, organizationId)
-    //set a success flash message
-    req.flash('success',`${title} was updated`)
+	try {
+		const projectId = req.params.id;
+		const results = validationResult(req);
+		if (!results.isEmpty()) {
+			results.array().forEach((error) => {
+				req.flash("error", error.msg);
+			});
+			//redirect to /edit-project/
+			return res.redirect(`/edit-project/${projectId}`);
+		}
+		const { title, description, location, date, organizationId } = req.body;
+		await updateProject(
+			projectId,
+			title,
+			description,
+			location,
+			date,
+			organizationId,
+		);
+		//set a success flash message
+		req.flash("success", `${title} was updated`);
 
-    res.redirect(`/project/${projectId}`);
-
-  } catch (error) {
-    next(error)
-  }
+		res.redirect(`/project/${projectId}`);
+	} catch (error) {
+		next(error);
+	}
 };
 
+const processVolunteerSignup = async (req, res, next) => {
+	try {
+		const projectId = req.params.id;
+		const userId = req.session.user.user_id;
+		if (!/^[1-9]\d*$/.test(projectId)) {
+			return res.status(400).send("Invalid project ID");
+		}
+		const project = await getProjectDetails(projectId);
+		if (!project) {
+			const error = new Error("Project not found");
+			error.status = 404;
+			return next(error);
+		}
+		await addVolunteer(userId, projectId);
 
-export { showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm, projectValidation, showEditProjectForm, processEditProjectForm };
+		//set a success flash message
+		req.flash("success", `You are volunteering for this project`);
+
+		res.redirect(`/project/${projectId}`);
+	} catch (error) {
+		next(error);
+	}
+};
+
+const processVolunteerRemoval = async (req, res, next) => {
+	try {
+		const projectId = req.params.id;
+		const userId = req.session.user.user_id;
+		if (!/^[1-9]\d*$/.test(projectId)) {
+			return res.status(400).send("Invalid project ID");
+		}
+		const project = await getProjectDetails(projectId);
+		if (!project) {
+			const error = new Error("Project not found");
+			error.status = 404;
+			return next(error);
+		}
+		await removeVolunteer(userId, projectId);
+
+		//set a success flash message
+		req.flash("success", `You are no longer volunteering for this project`);
+
+		res.redirect(`/project/${projectId}`);
+	} catch (error) {
+		next(error);
+	}
+};
+
+export {
+	showProjectsPage,
+	showProjectDetailsPage,
+	showNewProjectForm,
+	processNewProjectForm,
+	projectValidation,
+	showEditProjectForm,
+	processEditProjectForm,
+	processVolunteerSignup,
+	processVolunteerRemoval,
+};

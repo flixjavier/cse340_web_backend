@@ -18,6 +18,21 @@
     </dl>
   </section>
 
+  <section class="dashboard-account" aria-labelledby="volunteer-heading">
+    <h2 id="volunteer-heading">Your volunteer projects</h2>
+    <% if (volunteerProjects.length === 0) { %>
+      <p>
+        You haven't volunteered for any projects yet
+      </p>
+      <% } else { %>
+        <ul class="volunteer-projects-list">
+      <% volunteerProjects.forEach(project => { %>
+        <li><%= project.title %></li>
+    <% }); %>
+        </ul>
+    <% } %>
+  </section>
+
   <section aria-labelledby="explore-heading">
     <h2 id="explore-heading">Explore your community</h2>
     <div class="dashboard-grid">

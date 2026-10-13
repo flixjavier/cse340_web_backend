@@ -242,7 +242,7 @@ INSERT INTO roles (role_name, role_description) VALUES
     ; 
 
 SELECT * FROM public.roles
-ORDER BY role_id ASC 
+ORDER BY role_id ASC; 
 
 
 CREATE TABLE users (

@@ -27,7 +27,12 @@
       <% } else { %>
         <ul class="volunteer-projects-list">
       <% volunteerProjects.forEach(project => { %>
-        <li><%= project.title %></li>
+        <li><%= project.title %>
+        <form method="post" action="/project/<%=project.project_id%>/volunteer/remove">
+          <input type="hidden" name="returnTo" value="dashboard">
+          <button type="submit">Remove my signup</button>
+        </form>
+        </li>
     <% }); %>
         </ul>
     <% } %>

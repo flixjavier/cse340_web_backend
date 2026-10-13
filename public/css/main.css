@@ -166,6 +166,35 @@ h1 {
   border-top: 1px solid var(--alabaster-grey);
 }
 
+.volunteer-projects-list form {
+  margin-top: 0.5rem;
+}
+
+.volunteer-projects-list button {
+  background-color: var(--bright-snow);
+  border: 1px solid var(--pine-teal);
+  border-radius: 6px;
+  color: var(--pine-teal);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: bold;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 0.4rem 0.85rem;
+}
+
+.volunteer-projects-list button:hover {
+  background-color: var(--evergreen);
+  border-color: var(--evergreen);
+  color: var(--bright-snow);
+}
+
+.volunteer-projects-list button:focus-visible {
+  outline: 3px solid var(--pine-teal);
+  outline-offset: 4px;
+}
+
 .dashboard-account dl,
 .dashboard-grid {
   display: grid;

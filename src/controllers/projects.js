@@ -219,6 +219,10 @@ const processVolunteerRemoval = async (req, res, next) => {
 		//set a success flash message
 		req.flash("success", `You are no longer volunteering for this project`);
 
+		if (req.body.returnTo === "dashboard") {
+			return res.redirect("/dashboard");
+		}
+
 		res.redirect(`/project/${projectId}`);
 	} catch (error) {
 		next(error);
